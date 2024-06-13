@@ -55,9 +55,9 @@ class Auth_Controller extends RestApi_Controller
 		// $one_package == 1 ? $trial_check = 1 : $trial_check = 0;
 		$trial_expires = date('Y-m-d H:i:s', strtotime('+21 days'));
 
-		$first_name = 'Harry';
-		$last_name = 'Snotter';
-		$cred_one = "harry@snotty.com";
+		$first_name = 'Peter';
+		$last_name = 'Parker';
+		$cred_one = "spider@man.com";
 		$cred_two = "123456";
 
 		// Plan types: 0 - free, 1 - coaching
