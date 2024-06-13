@@ -39,12 +39,12 @@ class Auth_Controller extends RestApi_Controller
 
     function register()
     {
-    	// $json = file_get_contents('php://input');
-        // $data = json_decode($json);
-        // $first_name = TRIM($data->first_name);
-        // $last_name = TRIM($data->last_name);
-        // $cred_one = TRIM($data->cred_one);
-        // $cred_two = TRIM($data->cred_two);
+    	$json = file_get_contents('php://input');
+        $data = json_decode($json);
+        $first_name = TRIM($data->first_name);
+        $last_name = TRIM($data->last_name);
+        $cred_one = TRIM($data->cred_one);
+        $cred_two = TRIM($data->cred_two);
         // $notifications = TRIM($data->notifications);
         // $quotes = TRIM($data->quotes);
         // $quiz_mode = TRIM($data->quiz_mode);
@@ -54,10 +54,10 @@ class Auth_Controller extends RestApi_Controller
 		// $one_package == 1 ? $trial_check = 1 : $trial_check = 0;
 		$trial_expires = date('Y-m-d H:i:s', strtotime('+21 days'));
 
-		$first_name = 'Peter';
-		$last_name = 'Parker';
-		$cred_one = "spider@man.coms";
-		$cred_two = "123456";
+		// $first_name = 'Peter';
+		// $last_name = 'Parker';
+		// $cred_one = "spider@man.com";
+		// $cred_two = "123456";
 
 		// Plan types: 0 - free, 1 - coaching
     
