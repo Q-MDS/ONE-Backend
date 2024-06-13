@@ -1,0 +1,59 @@
+<?php 
+
+class Api_model extends CI_Model 
+{
+    function registerUser($data)
+    {
+        $this->db->insert('users',$data);
+    }
+
+    function checkLogin($data)
+    {
+		print_r($data);
+        $this->db->where($data);
+        $query = $this->db->get('users');
+        if($query->num_rows()==1)
+        {
+            return $query->row();
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    function getProfile($userId)
+    {
+        $this->db->select('name,email');
+        $this->db->where(['id'=>$userId]);
+        $query = $this->db->get('users');
+        return $query->row();
+    }
+
+    function getQuotes()
+    {
+        $data = array();
+		
+		$query = $this->db->query("SELECT * FROM list_quotes");
+		
+		if ($query->num_rows() > 0)
+		{
+			$num_recs = $query->num_rows();
+		
+			foreach ($query->result_array() as $row)
+			{
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		
+		return $data;
+    }
+
+    function getPurposes()
+    {
+        $query = $this->db->query("SELECT * FROM list_purpose");
+		return $query->result_array();
+    }
+
+}
