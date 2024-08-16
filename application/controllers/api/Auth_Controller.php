@@ -110,12 +110,12 @@ class Auth_Controller extends RestApi_Controller
 
     function login() 
     {
-    	$json = file_get_contents('php://input');
-        $data = json_decode($json);
-        $cred_one = $data->credOne;
-		$cred_two = $data->credTwo;
-        //  $cred_one = 'Dbruce@gmail.com';
-		//  $cred_two = '123456';
+    	// $json = file_get_contents('php://input');
+        // $data = json_decode($json);
+        // $cred_one = $data->credOne;
+		// $cred_two = $data->credTwo;
+         $cred_one = 'bruce006@gmail.com';
+		 $cred_two = '123456';
 		
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
