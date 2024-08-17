@@ -45,7 +45,7 @@ class Api_model extends CI_Model
 		
 			foreach ($query->result_array() as $row)
 			{
-				$data[] = $row;
+				$data = $row;
 			}
 		}
 		$query->free_result();
