@@ -110,14 +110,12 @@ class Auth_Controller extends RestApi_Controller
 
     function login() 
     {
-		// echo "booyaa!!!";
-		// die();
-    	// $json = file_get_contents('php://input');
-        // $data = json_decode($json);
-        // $cred_one = $data->credOne;
-		// $cred_two = $data->credTwo;
-         $cred_one = 'bruce006@gmail.com';
-		 $cred_two = '123456';
+    	$json = file_get_contents('php://input');
+        $data = json_decode($json);
+        $cred_one = $data->credOne;
+		$cred_two = $data->credTwo;
+        //  $cred_one = 'bruce006@gmail.com';
+		//  $cred_two = '123456';
 
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
@@ -130,8 +128,6 @@ class Auth_Controller extends RestApi_Controller
 				 $userId = $loginStatus['user_id'];
 				 $bearerToken = $this->api_auth->generateToken($userId);
 				 $member = $this->api_model->getMember($userId);
-				 echo "222" . $bearerToken;
-				//  die();
 
 				 // Check in how many days the trial expires
 				 $trial_expires = $member->trial_expires;
@@ -162,7 +158,6 @@ class Auth_Controller extends RestApi_Controller
              }
              else 
              {
-				echo "333";
                 $responseData = array(
                     'status'=>false,
                     'message' => 'Invalid Crendentials',
