@@ -110,8 +110,8 @@ class Auth_Controller extends RestApi_Controller
 
     function login() 
     {
-		echo "booyaa!!!";
-		die();
+		// echo "booyaa!!!";
+		// die();
     	// $json = file_get_contents('php://input');
         // $data = json_decode($json);
         // $cred_one = $data->credOne;
