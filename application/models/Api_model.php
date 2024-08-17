@@ -31,20 +31,33 @@ class Api_model extends CI_Model
     }
 
 
-    function checkLogin($data)
-    {
-		print_r($data);
-		die();
-        $this->db->where($data);
-        $query = $this->db->get('users');
-        if($query->num_rows()==1)
-        {
-            return $query->row();
-        }
-        else 
-        {
-            return false;
-        }
+    function checkLogin($cred_one, $cred_two)
+	{
+		$data = array();
+		$chk_cred_two = sha1($cred_two);
+		$num_recs = 0;
+		
+		$query = $this->db->query("SELECT * FROM users WHERE cred_one = " . $this->db->escape($cred_one) . " AND cred_two = " . $this->db->escape($chk_cred_two) . "");
+		
+		if ($query->num_rows() > 0)
+		{
+			$num_recs = $query->num_rows();
+		
+			foreach ($query->result_array() as $row)
+			{
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		
+		if ($num_recs > 0)
+		{
+			return $data[0]['id'];
+		}
+		else
+		{
+			return false;
+		}
     }
 
 	public function updatePlanType($userId, $data)
