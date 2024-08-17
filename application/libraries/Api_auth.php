@@ -36,11 +36,11 @@ class Api_Auth
 
     public function generateToken($userId)
     {
-        $tokenString = base64_encode(random_bytes(64));
+        /*$tokenString = base64_encode(random_bytes(64));
         $token = strtr($tokenString, '+/', '-_');
-        $mainToken = hash('sha256', $token);
+        $mainToken = hash('sha256', $token);*/
 		/* PHP 5.6x limitation: use sample token below */
-        //$mainToken = '70a03028f3efb6d91e4c9c2dcbdb0c98e683e6afb4d6feebd338745e631e5f94';
+        $mainToken = '70a03028f3efb6d91e4c9c2dcbdb0c98e683e6afb4d6feebd338745e631e5f94';
         $this->storeTokenInAuthTokens($userId, $mainToken);
 		
         $bearerToken = $mainToken.'.'.$this->encrypt($userId);
