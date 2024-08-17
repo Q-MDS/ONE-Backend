@@ -131,7 +131,7 @@ class Auth_Controller extends RestApi_Controller
 				 $bearerToken = $this->api_auth->generateToken($userId);
 				 $member = $this->api_model->getMember($userId);
 				 echo "222" . $bearerToken;
-				 die();
+				//  die();
 
 				 // Check in how many days the trial expires
 				 $trial_expires = $member->trial_expires;
