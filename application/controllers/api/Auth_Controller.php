@@ -131,7 +131,7 @@ class Auth_Controller extends RestApi_Controller
 				echo "222";
 				print_r($loginStatus);
 				
-				 $userId = $loginStatus->user_id;
+				 $userId = $loginStatus['user_id'];
 				 $bearerToken = $this->api_auth->generateToken($userId);
 
 				 $member = $this->api_model->getMember($userId);
