@@ -78,27 +78,27 @@ class Api_model extends CI_Model
 
 	function getMember($memberId)
 	{
-		$data = array();
+		// $data = array();
 		
-		$num_recs = 0;
+		// $num_recs = 0;
 		
-		$query = $this->db->query("SELECT * FROM members WHERE id = " . $this->db->escape($memberId) . "");
+		// $query = $this->db->query("SELECT * FROM members WHERE id = " . $this->db->escape($memberId) . "");
 		
-		if ($query->num_rows() > 0)
-		{
-			$num_recs = $query->num_rows();
+		// if ($query->num_rows() > 0)
+		// {
+		// 	$num_recs = $query->num_rows();
 		
-			foreach ($query->result_array() as $row)
-			{
-				$data = $row;
-			}
-		}
-		$query->free_result();
+		// 	foreach ($query->result_array() as $row)
+		// 	{
+		// 		$data = $row;
+		// 	}
+		// }
+		// $query->free_result();
 		
-		return $data;
-		// $this->db->where('id', $memberId);
-		// $query = $this->db->get('members');
 		// return $data;
+		$this->db->where('id', $memberId);
+		$query = $this->db->get('members');
+		return $query->row();
 	}	
 
     function getProfile($userId)
