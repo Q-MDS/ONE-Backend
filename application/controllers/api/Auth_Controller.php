@@ -121,19 +121,16 @@ class Auth_Controller extends RestApi_Controller
 
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
-			echo "000";
             //  $data = array('cred_one'=>$cred_one,'cred_two'=> sha1($cred_two));
             //  $loginStatus = $this->api_model->checkLogin($data);
 			$loginStatus = $this->api_model->checkLogin($cred_one, $cred_two);
-			echo "111";
+			
              if($loginStatus != false) 
              {
-				echo "222";
-				print_r($loginStatus);
-				
 				 $userId = $loginStatus['user_id'];
 				 $bearerToken = $this->api_auth->generateToken($userId);
-
+				 echo "222" . $userId;
+				 die();
 				 $member = $this->api_model->getMember($userId);
 
 				 // Check in how many days the trial expires
