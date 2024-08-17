@@ -52,7 +52,7 @@ class Api_model extends CI_Model
 		
 		if ($num_recs > 0)
 		{
-			return $data[0]['id'];
+			return $data;
 		}
 		else
 		{
