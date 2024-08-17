@@ -128,10 +128,10 @@ class Auth_Controller extends RestApi_Controller
              if($loginStatus != false) 
              {
 				 $userId = $loginStatus['user_id'];
-				 echo "222" . $userId;
-				 die();
 				 $bearerToken = $this->api_auth->generateToken($userId);
 				 $member = $this->api_model->getMember($userId);
+				 echo "222" . $bearerToken;
+				 die();
 
 				 // Check in how many days the trial expires
 				 $trial_expires = $member->trial_expires;
