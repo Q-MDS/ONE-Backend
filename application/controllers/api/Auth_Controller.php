@@ -118,6 +118,9 @@ class Auth_Controller extends RestApi_Controller
 		// $cred_two = $data->credTwo;
          $cred_one = 'bruce006@gmail.com';
 		 $cred_two = '123456';
+
+		 echo "XXX: $cred_one, $cred_two";
+		 die();
 		
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
