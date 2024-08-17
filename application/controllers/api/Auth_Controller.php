@@ -119,16 +119,15 @@ class Auth_Controller extends RestApi_Controller
          $cred_one = 'bruce006@gmail.com';
 		 $cred_two = '123456';
 
-		 echo "XXX: $cred_one, $cred_two";
-		 die();
-		
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
+			echo "000" . $loginStatus;
              $data = array('cred_one'=>$cred_one,'cred_two'=> sha1($cred_two));
              $loginStatus = $this->api_model->checkLogin($data);
-
+			echo "111" . $loginStatus;
              if($loginStatus != false) 
              {
+				echo "222";
 				 $userId = $loginStatus->user_id;
 				 $bearerToken = $this->api_auth->generateToken($userId);
 
@@ -163,6 +162,7 @@ class Auth_Controller extends RestApi_Controller
              }
              else 
              {
+				echo "333";
                 $responseData = array(
                     'status'=>false,
                     'message' => 'Invalid Crendentials',
