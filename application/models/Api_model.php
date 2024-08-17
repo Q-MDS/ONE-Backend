@@ -33,6 +33,8 @@ class Api_model extends CI_Model
 
     function checkLogin($data)
     {
+		print_r($data);
+		die();
         $this->db->where($data);
         $query = $this->db->get('users');
         if($query->num_rows()==1)
