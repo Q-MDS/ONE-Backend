@@ -121,13 +121,14 @@ class Auth_Controller extends RestApi_Controller
 
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
-			echo "000" . $loginStatus;
+			echo "000";
              $data = array('cred_one'=>$cred_one,'cred_two'=> sha1($cred_two));
              $loginStatus = $this->api_model->checkLogin($data);
-			echo "111" . $loginStatus;
+			echo "111";
              if($loginStatus != false) 
              {
 				echo "222";
+				print_r($loginStatus);
 				 $userId = $loginStatus->user_id;
 				 $bearerToken = $this->api_auth->generateToken($userId);
 
