@@ -130,6 +130,7 @@ class Auth_Controller extends RestApi_Controller
              {
 				echo "222";
 				print_r($loginStatus);
+				die();
 				 $userId = $loginStatus->user_id;
 				 $bearerToken = $this->api_auth->generateToken($userId);
 
