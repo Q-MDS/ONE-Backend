@@ -126,7 +126,8 @@ class Auth_Controller extends RestApi_Controller
              if($loginStatus != false) 
              {
 				 $userId = $loginStatus['user_id'];
-				 //$bearerToken = $this->api_auth->generateToken($userId);
+				//  $bearerToken = $this->api_auth->generateToken($userId);
+				 $bearerToken = '70a03028f3efb6d91e4c9c2dcbdb0c98e683e6afb4d6feebd338745e631e5f94';
 				 $member = $this->api_model->getMember($userId);
 
 				 // Check in how many days the trial expires
