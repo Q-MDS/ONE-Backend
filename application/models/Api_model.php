@@ -30,7 +30,6 @@ class Api_model extends CI_Model
 		return $this->db->insert_id();
     }
 
-
     function checkLogin($cred_one, $cred_two)
 	{
 		$data = array();
@@ -152,5 +151,11 @@ class Api_model extends CI_Model
 		
 		return $data;
     }
+
+	function getLinks()
+	{
+		$query = $this->db->query("SELECT * FROM `links` ORDER BY `id`");
+		return $query->result_array();
+	}
 
 }

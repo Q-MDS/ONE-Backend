@@ -239,19 +239,33 @@ class Auth_Controller extends RestApi_Controller
 		}
 	}
 
-	function get_questions()
-    {
-		$this->load->model('api_model');
-		$questions = $this->api_model->getQuestions();
+	// function get_questions()
+    // {
+	// 	$this->load->model('api_model');
+	// 	$questions = $this->api_model->getQuestions();
 
-		$result = array(
-			'status'=>true,
-			'message'=>'successfully fetched quotes',
-			'data'=>$questions
-		);
+	// 	$result = array(
+	// 		'status'=>true,
+	// 		'message'=>'successfully fetched quotes',
+	// 		'data'=>$questions
+	// 	);
 		
-		$this->response(json_encode($result),200);
-    }
+	// 	$this->response(json_encode($result),200);
+    // }
+
+	// function get_links()
+    // {
+    //     $this->load->model('api_model');
+	// 	$links = $this->api_model->getLinks();
+
+	// 	$err = array(
+	// 		'status'=>true,
+	// 		'message'=>'successfully fetched links',
+	// 		'data'=>$links
+	// 	);
+		
+	// 	$this->response(json_encode($err),200);
+    // }
 
 	function http_test()
 	{
