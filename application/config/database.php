@@ -82,7 +82,7 @@ $db['default'] = array(
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => TRUE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
@@ -95,24 +95,24 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$db['heroku'] = array(
-	'dsn'	=> '',
-	'hostname' => 'us-cluster-east-01.k8s.cleardb.net',
-	'username' => 'b82527e21b5b8c',
-	'password' => '9552badd',
-	'database' => 'heroku_1367b4d625638ea',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
+// $db['heroku'] = array(
+// 	'dsn'	=> '',
+// 	'hostname' => 'us-cluster-east-01.k8s.cleardb.net',
+// 	'username' => 'b82527e21b5b8c',
+// 	'password' => '9552badd',
+// 	'database' => 'heroku_1367b4d625638ea',
+// 	'dbdriver' => 'mysqli',
+// 	'dbprefix' => '',
+// 	'pconnect' => FALSE,
+// 	'db_debug' => (ENVIRONMENT !== 'production'),
+// 	'cache_on' => FALSE,
+// 	'cachedir' => '',
+// 	'char_set' => 'utf8',
+// 	'dbcollat' => 'utf8_general_ci',
+// 	'swap_pre' => '',
+// 	'encrypt' => FALSE,
+// 	'compress' => FALSE,
+// 	'stricton' => FALSE,
+// 	'failover' => array(),
+// 	'save_queries' => TRUE
+// );
