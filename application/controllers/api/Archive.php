@@ -13,14 +13,20 @@ class Archive extends CI_Controller {
 
 	public function backup()
 	{
-		$input = json_decode(file_get_contents('php://input'), true);
-    	
-		if (isset($input['file']) && isset($input['remoteId']) && isset($input['backupId'])) 
+		// $input = json_decode(file_get_contents('php://input'), true);
+
+
+		$json = file_get_contents('php://input');
+		$contents = json_decode($json);
+
+		$input = $contents->data;
+
+		if (isset($input->file) && isset($input->remoteId) && isset($input->backupId))
 		{
 			$backupDate = time();
-        	$fileData = base64_decode($input['file']);
-			$remoteId = $input['remoteId'];
-        	$backupId = $input['backupId'];
+        	$fileData = base64_decode($input->file);
+			$remoteId = $input->remoteId;
+        	$backupId = $input->backupId;
 
 			if ($backupId == '') 
 			{
@@ -49,9 +55,10 @@ class Archive extends CI_Controller {
 		} 
 		else 
 		{
+
 			$response = array('status' => 'error', 'message' => 'No file data received');
 		}
-
+		
 		echo json_encode($response);
 	}
 
@@ -59,10 +66,10 @@ class Archive extends CI_Controller {
 	{
 		$input = json_decode(file_get_contents('php://input'), true);
 		
-		if (!isset($input['remoteId'])) 
+		if (isset($input['remoteId'])) 
 		{
-			// $remoteId = $input['remoteId'];
-			$remoteId = 111;
+			$remoteId = $input['remoteId'];
+			// $remoteId = 111;
 			$backups = $this->archive_model->getBackups($remoteId);
 			$response = array('status' => 'success', 'backups' => $backups);
 		} 
@@ -72,5 +79,7 @@ class Archive extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
+
+	
 
 }

@@ -100,8 +100,8 @@ class Auth_Controller extends CI_Controller
 	function subscribe()
 	{
 		$json = file_get_contents('php://input');
-		$data = json_decode($json);
 		
+		$data = json_decode($json);
 		$member_id = TRIM($data->remote_id);
 		$purchase_info = TRIM($data->purchase_info);
 
@@ -128,25 +128,6 @@ class Auth_Controller extends CI_Controller
 
 	}
 
-	// √ 23022025
-	function send_profile()
-	{
-		$json = file_get_contents('php://input');
-		$data = json_decode($json);
-		
-		$remote_id = TRIM($data->remote_id);
-		$profile = TRIM($data->profile);
-
-		$this->api_model->sendProfile($remote_id, $profile);
-
-		$responseData = array(
-			'status'=>true,
-			'message' => 'Successfully updated profile',
-		);
-
-		echo json_encode($responseData);
-	}
-
 	// √ 0822025
 	function login() 
 	{
@@ -165,79 +146,65 @@ class Auth_Controller extends CI_Controller
 
 		// echo "FJB FJB --- Cred1: " . $cred_one . " Cred2: " . $cred_two . " Profile: " . $profile;
 
-		// Try to always return the stored profile record
-		// It will be updated from other app processes
-		// Becasuse select plan writes the profile we should never have a scenario where subscribed = 2
-
 		if(TRIM($cred_one) != '' || TRIM($cred_two) != '')
 		{
 			$loginStatus = $this->api_model->checkLogin($cred_one, $cred_two);
 			$bearerToken = '1234567890';
 			
-			
 			// Status: 0 - correct creds subscription is whack, 1 - correct creds and subscribed
 
 			if($loginStatus != false) 
 			{
-				$get_profile = $loginStatus['profile'];
-
-				$responseData = array(
-					'result' => true,
-					'status' => 1,	
-					'profile' => $get_profile,
-					'message' => 'Successfully Logged In',
-					'token' => $bearerToken
-				);
-
-				echo json_encode($responseData);
 				/** Verify subscription status: VALID - login creds ARE ok and subscription ok */	 
-				// if ($this->chkSubsctiption())
-				// {
-				// 	// Process profile record
-				// 	$profile_data = json_decode($profile);
-				// 	$subscribed = $profile_data->subscribed;
+				if ($this->chkSubsctiption())
+				{
+					// Process profile record
+					$profile_data = json_decode($profile);
+					$subscribed = $profile_data->subscribed;
 
-				// 	// If subscribed = 0 then send the PHP profile record back else use the APK profile and save to members record
-				// 	// If subscribed = 1 update the db profile and return the given profile
+					// If subscribed = 0 then send the PHP profile record back else use the APK profile and save to members record
+					// If subscribed = 1 update the db profile and return the given profile
 
-				// 	if ($subscribed == 2)
-				// 	{
-				// 		$get_profile = $loginStatus['profile'];
+					if ($subscribed == 2)
+					{
+						$get_profile = $loginStatus['profile'];
 						
-				// 		if ($get_profile == '')
-				// 		{
-				// 			echo "Oh poo";
-				// 			$get_profile = $profile;
-				// 			$data = array('profile' => $get_profile);
-				// 			$this->api_model->updateProfile($loginStatus['id'], $data);
-				// 		}
-				// 	}
-				// 	else 
-				// 	{
-				// 		$get_profile = $profile;
-				// 		$data = array('profile' => $get_profile);
-				// 		$this->api_model->updateProfile($loginStatus['id'], $data);
-				// 	}
+						if ($get_profile == '')
+						{
+							echo "Oh poo";
+							$get_profile = $profile;
+							$data = array('profile' => $get_profile);
+							$this->api_model->updateProfile($loginStatus['id'], $data);
+						}
+					}
+					else 
+					{
+						$get_profile = $profile;
+						$data = array('profile' => $get_profile);
+						$this->api_model->updateProfile($loginStatus['id'], $data);
+					}
 
-				// 	$responseData = array(
-				// 		'result' => true,
-				// 		'status' => 1,	
-				// 		'profile' => $get_profile,
-				// 		'message' => 'Successfully Logged In',
-				// 		'token' => $bearerToken
-				// 	);
-				// }
-				// else
-				// {
-				// 	/** Verify subscription status: VALID - login creds ARE ok and subscription NOT ok */
-				// 	$responseData = array(
-				// 		'result' => true,
-				// 		'status' => 0,	
-				// 		'profile' => $loginStatus['profile'],
-				// 		'message' => 'Subscription error',
-				// 		'token' => $bearerToken
-				// 	);
-				// }
+					$responseData = array(
+						'result' => true,
+						'status' => 1,	
+						'profile' => $get_profile,
+						'message' => 'Successfully Logged In',
+						'token' => $bearerToken
+					);
+				}
+				else
+				{
+					/** Verify subscription status: VALID - login creds ARE ok and subscription NOT ok */
+					$responseData = array(
+						'result' => true,
+						'status' => 0,	
+						'profile' => $loginStatus['profile'],
+						'message' => 'Subscription error',
+						'token' => $bearerToken
+					);
+				}
+				
+				echo json_encode($responseData);
 			}
 			else 
 			{

@@ -51,7 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['subscribe'] = 'api/Auth_Controller/create_subscriber';
-$route['send_profile'] = 'api/Auth_Controller/set_profile';
 $route['close_account'] = 'api/Auth_Controller/close_account';
 $route['forgot'] = 'api/Auth_Controller/forgot';
 $route['reset_password'] = 'Utils/reset_password';

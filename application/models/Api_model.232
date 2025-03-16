@@ -62,14 +62,6 @@ class Api_model extends CI_Model
 		return $this->db->affected_rows();
 	}
 
-	function sendProfile($remote_id, $profile)
-	{
-		$this->db->where('id', $remote_id);
-		$this->db->update('members', ['profile' => $profile]);
-
-		return $this->db->affected_rows();
-	}
-
     function registerUser($data)
     {
         $this->db->insert('users', $data);
