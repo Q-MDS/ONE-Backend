@@ -2,10 +2,11 @@
 
 class Api_model extends CI_Model 
 {
+	// √ 08022025
 	function checkUserExists($email)
 	{
 		$this->db->where('cred_one', $email);
-		$query = $this->db->get('users');
+		$query = $this->db->get('members');
 		if($query->num_rows() > 0)
 		{
 			return true;
@@ -15,12 +16,58 @@ class Api_model extends CI_Model
 			return false;
 		}
 	}
-
+	
+	// √ 08022025
 	function createMember($data)
 	{
 		$this->db->insert('members', $data);
 
 		return $this->db->insert_id();
+	}
+
+	// √ 08022025
+	function addSubscription($data)
+	{
+		$this->db->insert('subscriptions', $data);
+
+		return $this->db->insert_id();
+	}
+
+
+	// function createSubscriber($now, $rc_id, $cred_1, $cred_2, $first_name, $last_name, $email)
+	// {
+	// 	$data = array(
+	// 		'rc_id' => $rc_id,
+	// 		'cred_one' => $cred_1,
+	// 		'cred_two' => sha1($cred_2),
+	// 		'first_name' => $first_name,
+	// 		'last_name' => $last_name,
+	// 		'email' => $email,
+	// 		'subscribe_date' => $now,
+	// 		'subscribe_status' => 1,
+	// 		'profile' => '',
+	// 		'created_at' => $now,
+	// 		'updated_at' => $now
+	// 	);
+	// 	$this->db->insert('members', $data);
+
+	// 	return $this->db->insert_id();
+	// }
+
+	function updateProfile($insert_id, $data)
+	{
+		$this->db->where('id', $insert_id);
+		$this->db->update('members', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	function sendProfile($remote_id, $profile)
+	{
+		$this->db->where('id', $remote_id);
+		$this->db->update('members', ['profile' => $profile]);
+
+		return $this->db->affected_rows();
 	}
 
     function registerUser($data)
@@ -36,7 +83,7 @@ class Api_model extends CI_Model
 		$chk_cred_two = sha1($cred_two);
 		$num_recs = 0;
 		
-		$query = $this->db->query("SELECT * FROM users WHERE cred_one = " . $this->db->escape($cred_one) . " AND cred_two = " . $this->db->escape($chk_cred_two) . "");
+		$query = $this->db->query("SELECT * FROM members WHERE cred_one = " . $this->db->escape($cred_one) . " AND cred_two = " . $this->db->escape($chk_cred_two) . "");
 		
 		if ($query->num_rows() > 0)
 		{
@@ -70,7 +117,7 @@ class Api_model extends CI_Model
 	function updatePassword($userId, $data)
 	{
 		$this->db->where('id', $userId);
-		$this->db->update('users', $data);
+		$this->db->update('members', $data);
 
 		return $this->db->affected_rows();
 	}
@@ -158,4 +205,25 @@ class Api_model extends CI_Model
 		return $query->result_array();
 	}
 
+	function deleteMember($remote_id)
+	{
+		$this->db->where('id', $remote_id);
+		$this->db->delete('members');
+
+		return $this->db->affected_rows();
+	}
+
+	public function get_user_by_email($email) 
+	{
+        return $this->db->get_where('members', ['email' => $email])->row();
+    }
+
+	public function set_reset_token($user_id, $token) {
+        $data = [
+            'reset_token' => $token,
+            'reset_token_expires' => time() + 3600 // 1 hour
+        ];
+        $this->db->where('id', $user_id);
+        $this->db->update('members', $data);
+    }
 }
