@@ -50,15 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
-$route['subscribe'] = 'api/Auth_Controller/create_subscriber';
-$route['send_profile'] = 'api/Auth_Controller/set_profile';
-$route['close_account'] = 'api/Auth_Controller/close_account';
-$route['forgot'] = 'api/Auth_Controller/forgot';
-$route['reset_password'] = 'Utils/reset_password';
 $route['get_questions'] = 'api/Data_Controller/get_questions';
 $route['get_links'] = 'api/Data_Controller/get_links';
-$route['backup'] = 'api/Archive/backup';
-$route['restore_list'] = 'api/Archive/restore_list';
 $route['login'] = 'api/Auth_Controller/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
