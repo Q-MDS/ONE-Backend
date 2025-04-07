@@ -24,8 +24,6 @@ class Data_Controller extends RestApi_Controller
 
 	function get_links()
     {
-	    echo "Hello world";
-	    die();
 		$links = $this->api_model->getLinks();
 
 		$err = array(
