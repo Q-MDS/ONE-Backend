@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://192.168.1.28/one_backend/';
+//$config['base_url'] = 'http://41.76.214.236/one_backend/';
 $config['base_url'] = 'https://oneplan-9bcc0f516c08.herokuapp.com/';
 
 /*
